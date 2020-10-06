@@ -1,0 +1,45 @@
+.b-nav-icon-font {
+  font-size: 0.8em;
+  width: 1.2em;
+  margin-right: 0.4em;
+}
+
+.b-nav-hover {
+  border-radius: 6px;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+}
+
+.b-nav-hover:hover {
+  background-color: rgba(100, 100, 100, 0.8);
+}
+
+@media (max-width: 992px) {
+  .b-nav-hover {
+    padding-left: 6px;
+  }
+
+  .b-nav-icon-font {
+    margin-right: 1em;
+  }
+
+  .b-search-form {
+    width: 100%;
+  }
+}
+
+.b-nav-shadow {
+  box-shadow: 0 2px 5px 1px rgba(100, 100, 100, 0.7);
+}
+
+.b-nav-user {
+  min-width: 10rem;
+}
+
+.b-index-content-head-font {
+  font-size: 0.95em;
+}
+
+.active {
+  color: rgba(220, 220, 220, 0.8);
+}

@@ -1,0 +1,105 @@
+.b-w-40 {
+  width: 40%;
+  overflow: auto;
+}
+
+.b-blog-info-bgc {
+  background-color: rgba(181, 235, 145, 0.15);
+}
+
+.b-blog-info-textarea {
+  resize: none;
+  width: 100%;
+  height: 100px;
+}
+
+.b-nav-btns {
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  filter: drop-shadow(1px 1px 6px rgba(100, 100, 100, 0.8));
+}
+
+.b-blog-menu {
+  font-size: 0.85em;
+  width: 250%;
+  bottom: 100%;
+  right: 0%;
+  background-color: #fff;
+}
+
+ol {
+  padding: 0px;
+  margin: 0;
+}
+
+.b-menu-hide,
+.b-read-hide,
+.b-btns-hide {
+  display: none;
+}
+
+.b-read-on-mobile {
+  width: 100px !important;
+  height: 100px !important;
+  right: 110%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.b-read-on-mobile img {
+  width: 100%;
+}
+
+.b-btn-message {
+  padding: 2px 4px !important;
+  font-size: 10px;
+}
+
+.b-message-three-line {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.b-blog-content-back {
+  cursor: pointer;
+}
+
+.blog-content {
+  font-size: 16px;
+}
+
+.b-replay-text {
+  font-size: 12px;
+  max-height: 160px;
+}
+
+.b-like-cards {
+  top: 115px;
+  z-index: 100;
+  box-shadow: 1px 1px 6px 2px rgba(100, 100, 100, 0.4);
+}
+
+.b-like-card {
+  width: 120px;
+  font-size: 12px;
+  box-shadow: 0 0 2px 1px rgba(200, 200, 200, 0.6);
+}
+
+.b-toast-info {
+  top: 30px;
+  right: 30px;
+}
+
+.b-message-title {
+  background-color: rgba(200, 200, 200, 0.2);
+}
+
+.b-blog-content {
+  z-index: 100;
+}

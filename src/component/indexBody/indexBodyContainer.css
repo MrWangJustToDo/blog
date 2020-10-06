@@ -1,0 +1,62 @@
+.b-index-content-head-font {
+  font-size: 0.95em;
+}
+
+.b-content-pages::after {
+  content: attr(data-pages);
+  font-size: 1.4em;
+  display: inline-block;
+  line-height: 100%;
+}
+
+.b-card-content-splitLine:not(:last-of-type) {
+  background-image: linear-gradient(
+    to right,
+    transparent 4%,
+    rgba(0, 0, 0, 0.125) 5%,
+    rgba(0, 0, 0, 0.125) 95%,
+    transparent 96%
+  );
+  background-size: 100% 1px;
+  background-position: 0 99.9%;
+  background-repeat: no-repeat;
+}
+
+.b-card-content-overflow {
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.b-card-content-hover {
+  cursor: pointer;
+  transition-property: transform, filter;
+  transition-duration: 0.18s;
+}
+
+.b-card-content-hover:hover {
+  filter: drop-shadow(2px 2px 2px rgba(20, 31, 31, 0.4));
+}
+
+.b-content-current-page::after {
+  content: attr(data-page);
+  font-size: 1.4em;
+}
+
+.b-card-header-border {
+  border-bottom: 3px solid rgb(23, 162, 184);
+}
+
+.b-card-messege {
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.b-index-content-author {
+  width: 100%;
+  table-layout: fixed;
+}

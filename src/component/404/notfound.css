@@ -1,0 +1,9 @@
+@media (min-width: 992px) {
+  .b-404 {
+    min-height: 500px;
+  }
+}
+
+.b-404-content {
+  background-color: rgba(200, 200, 200, .2);
+}

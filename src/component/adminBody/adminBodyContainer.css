@@ -1,0 +1,27 @@
+.b-nav-user {
+  min-width: 10rem;
+}
+
+.b-nav-button-border-color {
+  border-color: rgb(222, 226, 230);
+}
+
+.b-input-pre-zIndex {
+  z-index: 10;
+}
+
+.b-form-needPara {
+  border-color: red !important;
+}
+
+.b-title-pre {
+  min-width: 80px !important;
+}
+
+.b-editor-md-zIndex{
+  z-index: 100;
+}
+
+.b-nav-head {
+  z-index: 100;
+}
