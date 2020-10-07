@@ -18,6 +18,7 @@ function IndexBodyContainerRightCommend() {
           map={() =>
             index
               .filter((it) => it.commend)
+              .slice(0, 4)
               .map((it, idx) => (
                 <Link
                   key={idx}

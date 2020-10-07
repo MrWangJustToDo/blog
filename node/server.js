@@ -5,7 +5,8 @@ const svgCaptcha = require("svg-captcha");
 const session = require("express-session");
 const sqlite3 = require("sqlite3");
 const sqlite = require("sqlite");
-const cors = require("cors");
+// const cors = require("cors");
+const path = require("path");
 const { getImgs } = require("./api");
 
 // 基础端口
@@ -17,13 +18,13 @@ var db;
 // 创建服务器
 let app = express();
 
-// 配置跨域
-app.use(
-  cors({
-    maxAge: 86400,
-    origin: "*",
-  })
-);
+// // 配置跨域
+// app.use(
+//   cors({
+//     maxAge: 86400,
+//     origin: "*",
+//   })
+// );
 
 // 绑定数据库文件
 app.use(async (req, rex, next) => {
@@ -72,6 +73,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.static("../build"));
+
 // 获取登录对象
 app.use(async (req, res, next) => {
   // 从签名cookie中找出该用户的信息并挂在req对象上以供后续的中间件访问
@@ -101,17 +104,17 @@ app.get("/captcha/str", (req, res) => {
 });
 
 // 判断是否能够自动登录
-app.get("/autoLogin", async (req, res, next) => {
+app.post("/autoLogin", async (req, res) => {
   if (req.user) {
-    res.json({ code: 0, state: req.user.username });
+    res.json({ code: 0, state: "自动登录成功", data: req.user.username });
   } else {
     res.json({ code: -1, state: "fail" });
   }
 });
 
 // 登录
-app.post("/login", async (req, res, next) => {
-  if (req.session.captcha === req.body.checkcode) {
+app.post("/login", async (req, res) => {
+  try {
     let user = await db.get(
       "SELECT rowid as id, * FROM users WHERE username = ? AND password = ?",
       req.body.username,
@@ -122,12 +125,13 @@ app.post("/login", async (req, res, next) => {
         maxAge: 8640000,
         signed: true,
       });
-      res.json({ code: 0, state: user.username });
+      res.json({ code: 0, state: "登录成功", data: user.username });
     } else {
-      res.json({ code: -1, state: "用户信息验证失败" });
+      res.json({ code: -1, state: "登录失败", data: "用户信息验证失败" });
     }
-  } else {
-    res.json({ code: -1, state: "验证码验证失败" });
+  } catch (e) {
+    console.log("/login方法失败", e);
+    res.json({ code: -1, state: "登录失败", data: e });
   }
 });
 
@@ -238,36 +242,41 @@ CREATE TABLE blogs(
 */
 // 发布新博客
 app.post("/publish", async (req, res) => {
-  // 获取对象加工。。。
-  let data = req.body;
-  if (!data["blog-link"]) {
-    let { images } = await getImgs(0, 7);
-    let { url } = images[(Math.random() * 7) | 0];
-    data["blog-link"] = `https://cn.bing.com${url}`;
-  }
-  try {
-    await db.run(
-      "INSERT INTO blogs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      data["blog-title"],
-      data["blog-content"],
-      data["blog-create"] || new Date().toLocaleDateString(),
-      0,
-      new Date().toLocaleDateString(),
-      data["blog-type"],
-      data["blog-add"].includes("推荐") ? 1 : 0,
-      data["blog-add"].includes("评论") ? 1 : 0,
-      data["blog-tag"],
-      data["blog-add"].includes("赞赏") ? 1 : 0,
-      data["blog-link"]
-    );
-    await db.run(
-      "UPDATE types SET blogcount = ? WHERE typename = ? ",
-      data["blog-type-count"],
-      data["blog-type"]
-    );
-    res.json({ code: 0, state: "success" });
-  } catch (e) {
-    console.log("/publish出现错误", e);
+  if (req.user) {
+    // 获取对象加工。。。
+    let data = req.body;
+    if (!data["blog-link"]) {
+      let { images } = await getImgs(0, 7);
+      let { url } = images[(Math.random() * 7) | 0];
+      data["blog-link"] = `https://cn.bing.com${url}`;
+    }
+    try {
+      await db.run(
+        "INSERT INTO blogs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        data["blog-title"],
+        data["blog-content"],
+        data["blog-create"] || new Date().toLocaleString(),
+        0,
+        new Date().toLocaleString(),
+        data["blog-type"],
+        data["blog-add"].includes("推荐") ? 1 : 0,
+        data["blog-add"].includes("评论") ? 1 : 0,
+        data["blog-tag"],
+        data["blog-add"].includes("赞赏") ? 1 : 0,
+        data["blog-link"]
+      );
+      await db.run(
+        "UPDATE types SET blogcount = ? WHERE typename = ? ",
+        data["blog-type-count"],
+        data["blog-type"]
+      );
+      res.json({ code: 0, state: "success" });
+    } catch (e) {
+      console.log("/publish出现错误", e);
+      res.json({ code: -1, state: e });
+    }
+  } else {
+    console.log("用户信息过期");
     res.json({ code: -1, state: e });
   }
 });
@@ -352,8 +361,47 @@ app.post("/addReadcount", async (req, res) => {
   }
 });
 
+// 前端路由返回数据
+app.get("/*", async (req, res) => {
+  await res.sendFile(path.resolve("../build", "index.html"));
+});
+
 const server = http.createServer(app);
 
 server.listen(port, () => {
   console.log(`listening on port: ${port}`);
 });
+
+/*
+CREATE TABLE users(
+  username string not null unique,
+  password string not null,
+  avatar string not null,
+  qq string not null,
+  email string not null,
+  wechat string not null);
+CREATE TABLE blogs(
+  title string not null unique,
+  content string not null,
+  created string not null,
+  readcount int not null default 0,
+  modify string not null,
+  type string not null,
+  commend int not null default 0,
+  message int not null default 0,
+  flag string not null,
+  award int not null default 1,
+  link string not null);
+CREATE TABLE message(
+  blogid int not null,
+  isprimaryint not null,
+  primaryid int not null,
+  isauthor int not null,
+  fromip string,
+  content string not null,
+  created string not null,
+  children string);
+CREATE TABLE types(
+  typename string not null,
+  blogcount int not null);
+*/

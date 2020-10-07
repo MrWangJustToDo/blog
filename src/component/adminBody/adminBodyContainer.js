@@ -1,21 +1,22 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import ToastBodyContainer from "../toast/toastBodyContainer";
 import AdminBodyContainerHead from "./adminBodyContainerHead";
-// import AdminBodyContainerSearch from "./adminBodyContainerSearch";
 import AdminBodyContainerPublish from "./adminBodyContainerPublish";
 import "./adminBodyContainer.css";
-import { useSelector } from "react-redux";
 
 function AdminBodyContainer() {
-  let { adminType } = useSelector((state) => state);
+  let { adminType, toastState } = useSelector((state) => state);
   return (
     <>
       <AdminBodyContainerHead />
       {adminType === "publish" ? (
         <AdminBodyContainerPublish />
       ) : (
-        ''
+        ""
         // <AdminBodyContainerSearch />
       )}
+      {toastState ? <ToastBodyContainer /> : ""}
     </>
   );
 }

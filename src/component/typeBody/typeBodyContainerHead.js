@@ -14,8 +14,8 @@ function TypeBodyContainerHead() {
         <div className="text-black-50">
           共
           <span
-            className="b-content-pages text-info"
-            data-pages={blogTypes ? blogTypes.length : 0}
+            className="b-content-pages text-info px-1"
+            data-pages={blogTypes && blogTypes.length}
           ></span>
           个
         </div>

@@ -22,9 +22,7 @@ function BlogBodyContainerHeadAuthor() {
         <div href="#" className="small text-decoration-none text-secondary">
           <span className="small">更新于: </span>
           <span className="ml-1 small text-info">
-            {blog
-              ? moment(new Date()).to(moment(new Date(blog.modify)))
-              : "none"}
+            {blog ? moment(new Date(blog.modify)).calendar() : "none"}
           </span>
         </div>
       </li>

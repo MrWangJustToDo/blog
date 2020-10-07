@@ -1,22 +1,22 @@
 import { produce } from "immer";
+import { groupBy } from "lodash";
+import moment from "moment";
+import "moment/locale/zh-cn";
 
 const reducerFunction = {
   // 登录
-  login(state, action) {
+  login_success(state, action) {
     return produce(state, (proxy) => {
       proxy.isLogin = true;
-      proxy.loginUsername = action.username;
+      proxy.loginUsername = action.data;
     });
   },
 
   // 登出
-  logout(state) {
+  login_failed(state) {
     return produce(state, (proxy) => {
       proxy.isLogin = false;
-      proxy.isLoaded = false;
       proxy.loginUsername = "";
-      proxy.currentRequestPath = "";
-      proxy.currentRequestPathArr = [];
     });
   },
 
@@ -104,6 +104,12 @@ const reducerFunction = {
   getIndex_success(state, action) {
     return produce(state, (proxy) => {
       proxy.index = action.data;
+      proxy.index.forEach((it) => {
+        let date = new Date(it["created"]);
+        it["createYear"] = date.getFullYear();
+        it["moment"] = moment(date).calendar();
+      });
+      proxy.archiveIndex = groupBy(proxy.index, "createYear");
       proxy.blogTotal = action.data.length;
       proxy.indexContentTotalPages = Math.ceil(
         action.data.length / state.indexContentLength
@@ -249,6 +255,22 @@ const reducerFunction = {
   addReadCount_failed(state, action) {
     console.log(action.data);
     return state;
+  },
+
+  // 文章发布成功
+  blogPublish_success(state) {
+    return produce(state, (proxy) => {
+      proxy.toastState = true;
+      proxy.toastMessage = "文章发布成功";
+    });
+  },
+
+  // 发布失败
+  blogPublish_failed(state) {
+    return produce(state, (proxy) => {
+      proxy.toastState = true;
+      proxy.toastMessage = "文章发布失败";
+    });
   },
 };
 

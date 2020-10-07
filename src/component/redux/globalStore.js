@@ -12,6 +12,9 @@ import {
   blogPrimaryReplaySaga,
   blogReplaySaga,
   addReadCountSaga,
+  loginSaga,
+  logoutSaga,
+  autoLoginSaga,
 } from "./saga";
 
 // 全局store的reducer处理函数
@@ -94,6 +97,8 @@ export default createStore(
     primaryReplayId: null,
     // 子组件回复
     childReplayId: null,
+    // 归档信息
+    archiveIndex: null,
   },
   applyMiddleware(sagaMiddleware)
 );
@@ -109,3 +114,6 @@ sagaMiddleware.run(blogMessageSaga);
 sagaMiddleware.run(blogPrimaryReplaySaga);
 sagaMiddleware.run(blogReplaySaga);
 sagaMiddleware.run(addReadCountSaga);
+sagaMiddleware.run(loginSaga);
+sagaMiddleware.run(logoutSaga);
+sagaMiddleware.run(autoLoginSaga);

@@ -164,6 +164,53 @@ function* addReadCountSaga() {
   yield takeLatest("addReadcount", addReadCountData);
 }
 
+function* loginData(action) {
+  try {
+    let { code, data } = yield call(axiosPost, "/login", action.data);
+    if (code === 0) {
+      yield put({ type: "login_success", data });
+    } else {
+      yield put({ type: "login_failed", data });
+    }
+  } catch (e) {
+    yield put({ type: "login_failed", data: e.message });
+  }
+}
+
+function* loginSaga() {
+  yield takeLatest("login", loginData);
+}
+
+function* logoutData() {
+  try {
+    yield call(axiosPost, "/logout");
+    yield put({ type: "login_failed" });
+  } catch (e) {
+    yield put({ type: "login_failed" });
+  }
+}
+
+function* logoutSaga() {
+  yield takeLatest("logout", logoutData);
+}
+
+function* autoLoginData() {
+  try {
+    let { code, data } = yield call(axiosPost, "/autoLogin");
+    if (code === 0) {
+      yield put({ type: "login_success", data });
+    } else {
+      yield put({ type: "login_failed", data });
+    }
+  } catch (e) {
+    yield put({ type: "login_failed", data: e.message });
+  }
+}
+
+function* autoLoginSaga() {
+  yield takeLatest("autoLogin", autoLoginData);
+}
+
 export {
   yiYanSaga,
   otherSaga,
@@ -175,4 +222,7 @@ export {
   blogPrimaryReplaySaga,
   blogReplaySaga,
   addReadCountSaga,
+  loginSaga,
+  logoutSaga,
+  autoLoginSaga
 };

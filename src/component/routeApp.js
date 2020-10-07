@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Head from "./head/headContainer";
 import Foot from "./foot/footContainer";
@@ -10,10 +11,19 @@ import AboutBody from "./aboutBody/aboutBodyContainer";
 import Login from "./login/loginContainer";
 import AdminBody from "./adminBody/adminBodyContainer";
 import Notfound from "./404/notfound";
+import ComponentLoadAndRender from "./tools/componentLoadAndRender";
 
 export default () => {
+  let dispatch = useDispatch();
+  let { isLogin } = useSelector((state) => state);
+  useEffect(() => {
+    dispatch({ type: "autoLogin" });
+  }, [dispatch]);
   return (
     <Switch>
+      <Route path="/mrwangLogin">
+        <Login />
+      </Route>
       <Route path="/">
         <Head />
         <Switch>
@@ -33,10 +43,12 @@ export default () => {
             <BlogBody />
           </Route>
           <Route path="/admin">
-            <AdminBody />
-          </Route>
-          <Route path="/login">
-            <Login />
+            <ComponentLoadAndRender
+              noborder
+              judge={() => isLogin}
+              map={() => <AdminBody />}
+              nothing={() => <Notfound />}
+            />
           </Route>
           <Route path="/">
             <div className="container my-4">

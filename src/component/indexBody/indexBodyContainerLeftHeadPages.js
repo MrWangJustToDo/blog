@@ -9,7 +9,7 @@ function IndexBodyContainerLeftHeadPages() {
       <div className="text-black-50">
         共
         <span
-          className="b-content-pages text-info"
+          className="b-content-pages text-info px-1"
           data-pages={indexContentTotalPages}
         ></span>
         页

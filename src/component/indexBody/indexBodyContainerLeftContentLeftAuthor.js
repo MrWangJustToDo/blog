@@ -1,6 +1,4 @@
 import React from "react";
-import moment from "moment";
-import "moment/locale/zh-cn";
 import { useSelector } from "react-redux";
 import headJpg from "../../image/head.jpg";
 
@@ -17,7 +15,7 @@ function IndexBodyContainerLeftContentLeftAuthor(props) {
       <li className="d-table-cell">
         <div className="small text-decoration-none text-secondary">
           <i className="fas fa-calendar small"></i>
-          <span className="ml-2 small">{moment(props.created).calendar()}</span>
+          <span className="ml-2 small">{props.moment}</span>
         </div>
       </li>
       <li className="d-table-cell">

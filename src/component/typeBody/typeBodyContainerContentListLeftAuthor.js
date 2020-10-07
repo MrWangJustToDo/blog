@@ -15,9 +15,7 @@ function TypeBodyContainerContentLeftAuthor(props) {
       <li className="d-table-cell">
         <p className="small text-decoration-none text-secondary">
           <i className="fa fa-calendar"></i>
-          <span className="ml-2 c-edit-time">
-            {new Date(props.modify).toLocaleDateString()}
-          </span>
+          <span className="ml-2 c-edit-time">{props.moment}</span>
         </p>
       </li>
       <li className="d-table-cell">

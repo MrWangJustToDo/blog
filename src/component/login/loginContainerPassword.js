@@ -1,12 +1,6 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 
 function LoginContainerPassword() {
-  const [passwordCheck, setPasswordCheck] = useState(false);
-
-  let passwordHandler = useCallback(() => {
-    setPasswordCheck(!passwordCheck);
-  }, [passwordCheck]);
-
   return (
     <div className="form-group row align-items-center">
       <label htmlFor="password" className="col-sm-3 col-form-label">

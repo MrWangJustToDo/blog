@@ -9,3 +9,7 @@
 .b-list-item-label-mini {
   font-size: 0.65em;
 }
+
+.b-archive-content {
+  min-height: 600px;
+}
