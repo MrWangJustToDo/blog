@@ -73,7 +73,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static("../build"));
+// app.use(express.static("../build"));
 
 // 获取登录对象
 app.use(async (req, res, next) => {
@@ -362,9 +362,9 @@ app.post("/addReadcount", async (req, res) => {
 });
 
 // 前端路由返回数据
-app.get("/*", async (req, res) => {
-  await res.sendFile(path.resolve("../build", "index.html"));
-});
+// app.get("/*", async (req, res) => {
+//   await res.sendFile(path.resolve("../build", "index.html"));
+// });
 
 const server = http.createServer(app);
 
