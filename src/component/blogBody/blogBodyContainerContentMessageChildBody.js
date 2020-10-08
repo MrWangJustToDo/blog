@@ -44,7 +44,7 @@ function BlogBodyContainerContentMessageChildBody(props) {
             </span>
           ) : (
             <span className="b-message-title text-primary px-2 rounded">
-              {props.fromip} :
+              {props.toip} :
             </span>
           )}
           <span className="float-right badge badge-primary">
