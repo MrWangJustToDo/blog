@@ -71,6 +71,7 @@ function BlogBodyContainerContentMessagePrimaryBody(props) {
                 {...it}
                 last={children}
                 primaryid={props.primaryid}
+                blogid={props.blogid}
               />
             ))
           }

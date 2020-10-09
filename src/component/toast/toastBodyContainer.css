@@ -1,4 +1,5 @@
 .b-toast-info {
   right: 20px;
   top: 10px;
+  z-index: 9999999;
 }

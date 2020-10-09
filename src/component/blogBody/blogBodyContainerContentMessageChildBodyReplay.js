@@ -26,7 +26,8 @@ function BlogBodyContainerContentMessageChildBodyReplay(props) {
           data: {
             last: props.last,
             current: obj,
-            id: props.primaryid,
+            primaryid: props.primaryid,
+            blogid: props.blogid,
             checkcode: checkInput.current.value,
           },
         });

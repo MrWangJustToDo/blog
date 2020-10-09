@@ -327,7 +327,9 @@ app.post("/addMessage", async (req, res) => {
     // 获取评论者ip
     let [ip] = /\d+\.\d+\.\d+\.\d+/.exec(req.ip);
     // 获取主评论id
-    let id = req.body.id;
+    let primaryid = req.body.primaryid;
+    // 获取文章id
+    let blogid = req.body.blogid;
     // 构建本次child对象
     let last = req.body.last;
     let current = req.body.current;
@@ -335,9 +337,10 @@ app.post("/addMessage", async (req, res) => {
     last.push(current);
     try {
       await db.run(
-        "UPDATE message SET children = ? WHERE primaryid = ?",
+        "UPDATE message SET children = ? WHERE primaryid = ? AND blogid = ?",
         JSON.stringify(last),
-        id
+        primaryid,
+        blogid
       );
       res.json({ code: 0, state: "success" });
     } catch (e) {
