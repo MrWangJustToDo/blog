@@ -7,7 +7,7 @@ function HeadContainerForm() {
       <input
         className="form-control mr-sm-2 col-9"
         type="search"
-        placeholder="搜索......"
+        placeholder="搜索暂时没做......"
         aria-label="Search"
       />
       <button className="btn btn-outline-info my-1 my-sm-0 ml-1" type="submit">

@@ -1,11 +1,27 @@
 import React from "react";
+import { AsyncComponent } from "../tools/importComponent";
 import ComponentLoadAndRender from "../tools/componentLoadAndRender";
-import BlogBodyContainerContentImg from "./blogBodyContainerContentImg";
-import BlogBodyContainerContentType from "./blogBodyContainerContentType";
-import BlogBodyContainerContentBody from "./blogBodyContainerContentBody";
-import BlogBodyContainerContentLike from "./blogBodyContainerContentLike";
-import BlogBodyContainerContentMessage from "./blogBodyContainerContentMessage";
+// import BlogBodyContainerContentImg from "./blogBodyContainerContentImg";
+// import BlogBodyContainerContentType from "./blogBodyContainerContentType";
+// import BlogBodyContainerContentBody from "./blogBodyContainerContentBody";
+// import BlogBodyContainerContentLike from "./blogBodyContainerContentLike";
+// import BlogBodyContainerContentMessage from "./blogBodyContainerContentMessage";
 import flushBlogItem from "../tools/flushBlogItem";
+const BlogBodyContainerContentImg = AsyncComponent(() =>
+  import("./blogBodyContainerContentImg")
+);
+const BlogBodyContainerContentType = AsyncComponent(() =>
+  import("./blogBodyContainerContentType")
+);
+const BlogBodyContainerContentBody = AsyncComponent(() =>
+  import("./blogBodyContainerContentBody")
+);
+const BlogBodyContainerContentLike = AsyncComponent(() =>
+  import("./blogBodyContainerContentLike")
+);
+const BlogBodyContainerContentMessage = AsyncComponent(() =>
+  import("./blogBodyContainerContentMessage")
+);
 
 function BlogBodyContainerContent() {
   // 获取当前博客信息

@@ -1,7 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import IndexBodyContainerLeftContentLeft from "./indexBodyContainerLeftContentLeft";
-import IndexBodyContainerLeftContentRight from "./indexBodyContainerLeftContentRight";
+import { AsyncComponent } from "../tools/importComponent";
+// import IndexBodyContainerLeftContentLeft from "./indexBodyContainerLeftContentLeft";
+// import IndexBodyContainerLeftContentRight from "./indexBodyContainerLeftContentRight";
+const IndexBodyContainerLeftContentLeft = AsyncComponent(() =>
+  import("./indexBodyContainerLeftContentLeft")
+);
+const IndexBodyContainerLeftContentRight = AsyncComponent(() =>
+  import("./indexBodyContainerLeftContentRight")
+);
 
 function IndexBodyContainerLeftContent(props) {
   return (
