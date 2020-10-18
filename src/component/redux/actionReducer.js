@@ -248,13 +248,16 @@ const reducerFunction = {
       proxy.index
         .filter((it) => it.rowid === action.data.id)
         .forEach((it) => (it.readcount = action.data.count));
+      proxy.blogContentState = false;
     });
   },
 
   // // 增加阅读次数失败
   addReadCount_failed(state, action) {
     console.log(action.data);
-    return state;
+    return produce(state, (proxy) => {
+      proxy.blogContentState = false;
+    });
   },
 
   // 文章发布成功
@@ -270,6 +273,12 @@ const reducerFunction = {
     return produce(state, (proxy) => {
       proxy.toastState = true;
       proxy.toastMessage = "文章发布失败";
+    });
+  },
+  // 文章内容加载完成
+  blogContentLoaded(state) {
+    return produce(state, (proxy) => {
+      proxy.blogContentState = true;
     });
   },
 };

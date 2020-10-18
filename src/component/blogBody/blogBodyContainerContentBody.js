@@ -16,6 +16,7 @@ function BlogBodyContainerContentBody() {
       } catch (e) {
         ref.current.innerText = content;
       }
+      dispatch({type: 'blogContentLoaded'})
     }
     return () =>
       dispatch({

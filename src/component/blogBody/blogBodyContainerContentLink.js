@@ -3,6 +3,7 @@ import jquery from "jquery";
 import * as tocbot from "tocbot";
 import { toCanvas } from "qrcode";
 import "tocbot/dist/tocbot.css";
+import { useSelector } from "react-redux";
 
 function BlogBodyContainerContentLink() {
   let topRef = useRef();
@@ -10,6 +11,7 @@ function BlogBodyContainerContentLink() {
   let menuRef = useRef();
   let btnsRef = useRef();
   let messageRef = useRef();
+  let { blogContentState } = useSelector((state) => state);
   useEffect(() => {
     let toMessege = jquery(messageRef.current);
     let b_btns = jquery(btnsRef.current);
@@ -42,17 +44,6 @@ function BlogBodyContainerContentLink() {
     b_btns.removeClass("b-btns-hide");
     b_btns.hide();
 
-    // 初始化目录
-    tocbot.init({
-      // Where to render the table of contents.
-      tocSelector: ".js-toc",
-      // Where to grab the headings to build the table of contents.
-      contentSelector: ".blog-content",
-      // Which headings to grab inside of the contentSelector element.
-      headingSelector: "h1, h2, h3",
-      // For headings inside relative or absolute positioned containers within content.
-      hasInnerContainers: true,
-    });
     // 目录按钮点击
     let menu = jquery(menuRef.current).prop("status", false);
     let menu_content = menu.next(".menu-content");
@@ -108,11 +99,27 @@ function BlogBodyContainerContentLink() {
       toMessege.off("click");
       toTop.off("click");
       jwindow.off("click", set);
-      tocbot.destroy();
       menu.off("click");
       btn.off("click");
     };
   }, []);
+
+  useEffect(() => {
+    if (blogContentState) {
+      // 初始化目录
+      tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: ".js-toc",
+        // Where to grab the headings to build the table of contents.
+        contentSelector: ".blog-content",
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: "h1, h2, h3",
+        // For headings inside relative or absolute positioned containers within content.
+        hasInnerContainers: true,
+      });
+    }
+    return () => tocbot.destroy();
+  }, [blogContentState]);
   return (
     <div
       className="btn-group-vertical position-fixed b-nav-btns mr-2 mb-2 text-monospace b-btns-hide"

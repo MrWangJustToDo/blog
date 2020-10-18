@@ -99,6 +99,8 @@ export default createStore(
     childReplayId: null,
     // 归档信息
     archiveIndex: null,
+    // 文章内容加载完成
+    blogContentState: false,
   },
   applyMiddleware(sagaMiddleware)
 );
