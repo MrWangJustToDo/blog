@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import jquery from "jquery";
 import { promiseNext } from "../tools/promise";
 import "./toastBodyContainer.css";
-import jquery from "jquery";
 
 function ToastBodyContainer() {
   let toast = useRef();
@@ -26,7 +26,7 @@ function ToastBodyContainer() {
       ref={toast}
     >
       <div className="toast-header">
-        <strong className="mr-4">回复发送失败</strong>
+        <strong className="mr-4">新提示</strong>
         <small className="text-muted"> 刚刚</small>
         <button
           type="button"

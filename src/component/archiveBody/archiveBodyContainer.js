@@ -25,6 +25,16 @@ function ArchiveBodyContainer() {
                 );
               }
             }}
+            nothing={() => (
+              <ul className="list-group user-select-none mb-5">
+                <li className="list-group-item">
+                  <div className="py-1 py-lg-5 text-center text-info">
+                    没有文章数据
+                  </div>
+                </li>
+              </ul>
+            )}
+            delay={1000}
           />
         </div>
       </div>

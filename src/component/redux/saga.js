@@ -153,8 +153,15 @@ function* blogReplaySaga() {
 
 function* addReadCountData(action) {
   try {
-    yield call(axiosPost, "/addReadcount", action.data);
-    yield put({ type: "addReadCount_success", data: action.data });
+    let { code, data } = yield call(axiosPost, "/addReadcount", action.data);
+    if (code === 0) {
+      yield put({
+        type: "addReadCount_success",
+        data: { id: action.data.id, readcount: data },
+      });
+    } else {
+      yield put({ type: "addReadCount_failed", data: "服务器设置错误" });
+    }
   } catch (e) {
     yield put({ type: "addReadCount_failed", data: e.message });
   }
@@ -224,5 +231,5 @@ export {
   addReadCountSaga,
   loginSaga,
   logoutSaga,
-  autoLoginSaga
+  autoLoginSaga,
 };

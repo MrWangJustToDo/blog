@@ -354,10 +354,19 @@ app.post("/addMessage", async (req, res) => {
 // 更新阅读量
 app.post("/addReadcount", async (req, res) => {
   // 获取要查找的文章id
-  let { id, count } = req.body;
+  let { id } = req.body;
   try {
-    await db.run("UPDATE blogs SET readcount = ? WHERE rowid = ?", count, id);
-    res.json({ code: 0, state: "success" });
+    // 获取当前博客的阅读次数
+    let { readcount } = await db.get(
+      "SELECT readcount FROM blogs WHERE rowid = ?",
+      id
+    );
+    await db.run(
+      "UPDATE blogs SET readcount = ? WHERE rowid = ?",
+      +readcount + 1,
+      id
+    );
+    res.json({ code: 0, state: "success", data: +readcount + 1 });
   } catch (e) {
     console.log("/addMessage出现问题", e);
     res.json({ code: -1, state: e });

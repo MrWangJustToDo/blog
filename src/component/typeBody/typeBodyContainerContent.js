@@ -16,8 +16,8 @@ function TypeBodyContainerContent() {
           map={() =>
             index
               .filter((it) => it.type === blogTypeSelect)
-              .map((it, index) => (
-                <TypeBodyContainerContentList key={index} {...it} />
+              .map((it) => (
+                <TypeBodyContainerContentList key={it.rowid} {...it} />
               ))
           }
           nothing={() => (
@@ -27,6 +27,7 @@ function TypeBodyContainerContent() {
               </div>
             </li>
           )}
+          delay={1000}
         />
       </ul>
     </div>

@@ -10,7 +10,7 @@ function HeadContainerForm() {
         placeholder="搜索暂时没做......"
         aria-label="Search"
       />
-      <button className="btn btn-outline-info my-1 my-sm-0 ml-1" type="submit">
+      <button className="btn btn-outline-info my-1 my-sm-0 ml-1" type="submit" disabled>
         <i className="fas fa-search"></i>
       </button>
     </form>

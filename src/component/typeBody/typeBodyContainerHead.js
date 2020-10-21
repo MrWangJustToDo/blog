@@ -15,7 +15,7 @@ function TypeBodyContainerHead() {
           共
           <span
             className="b-content-pages text-info px-1"
-            data-pages={blogTypes && blogTypes.length}
+            data-pages={blogTypes ? blogTypes.length : 0}
           ></span>
           个
         </div>
@@ -32,7 +32,13 @@ function TypeBodyContainerHead() {
               />
             ))
           }
+          nothing={() => (
+            <div className="py-1 py-lg-5 text-center text-danger">
+              标签数据获取失败
+            </div>
+          )}
           noborder={true}
+          delay={1000}
         />
       </div>
     </div>

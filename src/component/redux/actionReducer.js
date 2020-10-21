@@ -247,7 +247,7 @@ const reducerFunction = {
     return produce(state, (proxy) => {
       proxy.index
         .filter((it) => it.rowid === action.data.id)
-        .forEach((it) => (it.readcount = action.data.count));
+        .forEach((it) => (it.readcount = action.data.readcount));
       proxy.blogContentState = false;
     });
   },

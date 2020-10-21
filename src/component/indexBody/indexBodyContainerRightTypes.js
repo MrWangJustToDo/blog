@@ -6,9 +6,10 @@ import ComponentLoadAndRender from "../tools/componentLoadAndRender";
 
 function IndexBodyContainerRightTypes() {
   let dispatch = useDispatch();
-  let { blogTypeOfContents } = useSelector((state) => state);
   // 刷新类型
   let blogTypes = flushBlogType();
+  
+  let { blogTypeOfContents } = useSelector((state) => state);
   // 点击
   let clickHandler = useCallback(
     (e) => {
@@ -56,6 +57,7 @@ function IndexBodyContainerRightTypes() {
                 未获取到文章类型
               </div>
             )}
+            delay={1000}
           />
         </div>
       </div>

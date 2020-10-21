@@ -34,7 +34,7 @@ function BlogBodyContainerContentMessage() {
                 ))
             }
             nothing={() => (
-              <div className="my-2 text-center">当前博客还没有评论。。。</div>
+              <div className="my-2 text-center">当前博客还没有评论</div>
             )}
             forwardProp={message}
             delay={300}

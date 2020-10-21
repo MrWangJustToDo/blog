@@ -28,7 +28,7 @@ function IndexBodyContainerLeft() {
               ))
           }
           nothing={() => <Notfound noback={true} />}
-          delay={1000}
+          delay={2000}
         />
         <IndexBodyContainerLeftFootPages />
       </div>

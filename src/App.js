@@ -14,7 +14,7 @@ import store from "./component/redux/globalStore";
 // route路由组件
 import RouteApp from "./component/routeApp";
 // font-awsome的css文件
-import "./css/all.min.css";
+// import "./css/all.min.css";
 // typo显示优化
 import "./css/typo.css";
 // animate的css文件

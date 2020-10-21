@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import markedInit from "../tools/marked";
 import flushBlogItem from "../tools/flushBlogItem";
 import "highlight.js/styles/idea.css";
-import { useDispatch } from "react-redux";
 
 function BlogBodyContainerContentBody() {
   let ref = useRef();

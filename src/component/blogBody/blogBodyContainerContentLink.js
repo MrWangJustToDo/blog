@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import jquery from "jquery";
 import * as tocbot from "tocbot";
 import { toCanvas } from "qrcode";
 import "tocbot/dist/tocbot.css";
-import { useSelector } from "react-redux";
 
 function BlogBodyContainerContentLink() {
   let topRef = useRef();
@@ -105,6 +105,7 @@ function BlogBodyContainerContentLink() {
   }, []);
 
   useEffect(() => {
+    let re;
     if (blogContentState) {
       // 初始化目录
       tocbot.init({
@@ -117,8 +118,9 @@ function BlogBodyContainerContentLink() {
         // For headings inside relative or absolute positioned containers within content.
         hasInnerContainers: true,
       });
+      re = tocbot.destroy.bind(tocbot);
     }
-    return () => tocbot.destroy();
+    return () => re && re();
   }, [blogContentState]);
   return (
     <div

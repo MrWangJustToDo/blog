@@ -1,7 +1,8 @@
 import React from "react";
 import TypeBodyContainerHead from "./typeBodyContainerHead";
-import TypeBodyContainerContent from "./typeBodyContainerContent";
 import "./typeBodyContainer.css";
+import TypeBodyContainerContent from "./typeBodyContainerContent";
+
 
 function TypeBodyContainer() {
   return (
