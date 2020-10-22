@@ -73,7 +73,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use(express.static("../build"));
+// 部署必须
+app.use(express.static("../build"));
 
 // 获取登录对象
 app.use(async (req, res, next) => {
@@ -373,10 +374,10 @@ app.post("/addReadcount", async (req, res) => {
   }
 });
 
-// 前端路由返回数据
-// app.get("/*", async (req, res) => {
-//   await res.sendFile(path.resolve("../build", "index.html"));
-// });
+// 前端路由返回数据必须
+app.get("/*", async (req, res) => {
+  await res.sendFile(path.resolve("../build", "index.html"));
+});
 
 const server = http.createServer(app);
 
@@ -384,6 +385,7 @@ server.listen(port, () => {
   console.log(`listening on port: ${port}`);
 });
 
+// 建表语句
 /*
 CREATE TABLE users(
   username string not null unique,
